@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--========================================================= Font Awesome =============================================-->
+  <link rel="stylesheet" href="./css/all.min.css">
+  <!--========================================================= Bootsrap =================================================-->
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <!--========================================================= Style CSS ================================================-->
+  <link rel="stylesheet" href="./css/style.css">
+  <title>CRUD</title>
+</head>
+
+<body class="bg-dark">
+  <div class="container py-5">
+    <h1 class="mb-5 text-white">Product management system</h1>
+    <div class="w-75 mx-auto">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="productName" placeholder="Product name">
+        <label for="productName">Product name</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="number" class="form-control" id="productPrice" placeholder="Product price">
+        <label for="productPrice">Product price</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" list="categories" class="form-control" id="productCategory" placeholder="Product catgory">
+        <label for="productCategory">Product catgory</label>
+        <datalist id="categories">
+          <option value="TV" />
+          <option value="Mobile" />
+          <option value="Screen" />
+          <option value="Laptop" />
+          <option value="Other" />
+        </datalist>
+      </div>
+      <div class="form-floating mb-3">
+        <textarea class="form-control" id="productdescription" placeholder="Product description"></textarea>
+        <label for="productdescription">Product description</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="file" class="form-control" id="productImage" placeholder="Product image">
+        <label for="productImage">Product image</label>
+      </div>
+      <button onclick="addProduct()" class="btn btn-primary">Add product</button>
+    </div>
+  </div>
+  <!--=================================================== Files JS ==========================================================-->
+  <script src="./JS/bootstrap.bundle.min.js"></script>
+  <script src="./JS/script.js"></script>
+</body>
+
+</html>
