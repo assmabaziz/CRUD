@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <!--========================================================= Style CSS ================================================-->
   <link rel="stylesheet" href="./css/style.css">
+  <!--========================================================= Favicon ==================================================-->
+  <link rel="shortcut icon" href="./images/favicon-150x150.png" type="image/x-icon">
   <title>CRUD</title>
 </head>
 
@@ -44,7 +46,18 @@
         <input type="file" class="form-control" id="productImage" placeholder="Product image">
         <label for="productImage">Product image</label>
       </div>
-      <button onclick="addProduct()" class="btn btn-primary">Add product</button>
+      <button onclick="addProduct()" class="btn btn-primary" id="addBtn">Add product</button>
+      <button onclick="updateProduct()" class="btn btn-info d-none" id="updateBtn">Update Product</button>
+    </div>
+  </div>
+  <div class="container py-3">
+    <div class="form-floating ">
+      <input oninput="search(this.value)" type="text" class="form-control" id="searchItem" placeholder="Search">
+      <label for="searchItem">Search</label>
+    </div>
+  </div>
+  <div class="container py-5">
+    <div class="row  gy-4" id="addedProduct">
     </div>
   </div>
   <!--=================================================== Files JS ==========================================================-->
