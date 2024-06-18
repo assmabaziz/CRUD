@@ -20,15 +20,25 @@
     <h1 class="mb-5 text-white">Product management system</h1>
     <div class="w-75 mx-auto">
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="productName" placeholder="Product name">
+        <input type="text" oninput="validateProductInput(this)" class="form-control " id="productName"
+          placeholder="Product name">
+          <div class="alert alert-danger py-2 mt-2 d-none">
+            <p class="m-0">Product name should start with capital lettre and contains at minimum 5 caracters</p>
+          </div>
         <label for="productName">Product name</label>
       </div>
       <div class="form-floating mb-3">
-        <input type="number" class="form-control" id="productPrice" placeholder="Product price">
+        <input type="number" oninput="validateProductInput(this)"  class="form-control" id="productPrice" placeholder="Product price">
+        <div class="alert alert-danger py-2 mt-2 d-none">
+          <p class="m-0">Product price 10-20$</p>
+        </div>
         <label for="productPrice">Product price</label>
       </div>
       <div class="form-floating mb-3">
-        <input type="text" list="categories" class="form-control" id="productCategory" placeholder="Product catgory">
+        <input type="text" oninput="validateProductInput(this)"  list="categories" class="form-control" id="productCategory" placeholder="Product catgory">
+        <div class="alert alert-danger py-2 mt-2 d-none">
+          <p class="m-0">Product category must be one of elements in the list</p>
+        </div>
         <label for="productCategory">Product catgory</label>
         <datalist id="categories">
           <option value="TV" />
@@ -39,24 +49,43 @@
         </datalist>
       </div>
       <div class="form-floating mb-3">
-        <textarea class="form-control" id="productdescription" placeholder="Product description"></textarea>
+        <textarea class="form-control" oninput="validateProductInput(this)"  id="productdescription" placeholder="Product description"></textarea>
+        <div class="alert alert-danger py-2 mt-2 d-none">
+          <p class="m-0">Product description should contains at minimum 10 caracters</p>
+        </div>
         <label for="productdescription">Product description</label>
       </div>
       <div class="form-floating mb-3">
         <input type="file" class="form-control" id="productImage" placeholder="Product image">
         <label for="productImage">Product image</label>
       </div>
-      <button onclick="addProduct()" class="btn btn-primary" id="addBtn">Add product</button>
-      <button onclick="updateProduct()" class="btn btn-info d-none" id="updateBtn">Update Product</button>
+      <button onclick="addProduct()" class="btn btn-primary mb-2" id="addBtn">
+        <i class="fa-solid fa-plus me-2"></i>
+        Add product</button>
+        <div class="alert alert-danger py-2 mt-2 d-none" id="alertInfo">
+          <p class="m-0">Product info must include:
+            <ul>
+              <li>Product name should start with capital lettre and contains at minimum 5 caracters</li>
+              <li>Product price 10-20$</li>
+              <li>Product category must be one of elements in the list</li>
+              <li>Product description should contains at minimum 10 caracters</li>
+            </ul>
+          </p>
+        </div>
+      <button onclick="updateProduct()" class="btn btn-info d-none" id="updateBtn">
+        <i class="fa-solid fa-pen me-2"></i>
+        Update Product</button>
     </div>
   </div>
   <div class="container py-3">
-    <div class="form-floating ">
+    <div class="form-floating w-75 mx-auto">
       <input oninput="search(this.value)" type="text" class="form-control" id="searchItem" placeholder="Search">
-      <label for="searchItem">Search</label>
+      <label for="searchItem">
+        <i class="fa-solid fa-magnifying-glass me-2"></i>
+        Search</label>
     </div>
   </div>
-  <div class="container py-5">
+  <div class="container py-5 mt-5">
     <div class="row  gy-4" id="addedProduct">
     </div>
   </div>

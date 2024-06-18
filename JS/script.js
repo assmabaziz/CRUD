@@ -16,18 +16,31 @@ if (localStorage.getItem("productList") != null) {
 //=========================== Function To Add New Product =====================================================
 
 function addProduct() {
-  var product = {
-    name: productName.value,
-    price: productPrice.value,
-    category: productCategory.value,
-    description: productDescription.value,
-    image: `images/${productImage.files[0]?.name}`,
-  };
-  productList.push(product);
-  updatLocalStorage();
-  updateInputValue();
-  displayProduct(productList); //cette foction va etre appelee apres l'ajout du produit dans le tableau
-  // console.log(productList);
+  if (
+    /^[A-Z][a-z0-9]{3,10}$/.test(productName.value) == true &&
+    /^(1[0-9]|20)$/.test(productPrice.value) == true &&
+    /^(TV|Mobile|Screen|Laptop|other)$/i.test(productCategory.value) == true &&
+    /^.{1,30}$/.test(productDescription.value) == true
+  ) {
+    var product = {
+      name: productName.value,
+      price: productPrice.value,
+      category: productCategory.value,
+      description: productDescription.value,
+      image: `./images/${productImage.files[0]}`,
+    };
+    if (productImage.files[0] == undefined) {
+      product.image = "./images/mr_pants3.jpg";
+    }
+    productList.push(product);
+    updatLocalStorage();
+    updateInputValue();
+    displayProduct(productList); //cette foction va etre appelee apres l'ajout du produit dans le tableau
+    // console.log(productList);
+    alertInfo.classList.add("d-none");
+  } else {
+    alertInfo.classList.remove("d-none");
+  }
 }
 
 //=========================== Function To Display Product Added by the function Above =======================
@@ -38,11 +51,9 @@ function displayProduct(list) {
     newProduct += `
     <div class="col-md-3">
         <figure class ="text-white border border-2 border-info rounded-2 overflow-hidden">
-          <img src="${
-            list[i].image
-          }" class="mb-3 d-block w-100" alt="Mr pants" />
+          <img src="${list[i].image}" class="mb-3 d-block w-100" alt="Mr pants" />
           <figcaption class="p-3">
-            <h2>Name: ${list[i].newName ? list[i].newName : list[i].name}</h2>
+            <h2>Name: ${list[i].name}</h2>
             <h3 class="fs-4">Price: $ ${list[i].price}</h3>
             <p>Description: ${list[i].description}</p>
             <h4 class="fs-6">Category:  ${list[i].category}</h4>
@@ -107,13 +118,35 @@ function search(searchValue) {
   var searchList = [];
   for (var i = 0; i < productList.length; i++) {
     if (productList[i].name.toLowerCase().includes(searchValue.toLowerCase())) {
-      productList[i].newName = productList[i].name.toLowerCase().replace(
-        searchValue.toLowerCase(),
-        `<span class="text-danger">${searchValue}</span>`
-      );
+      productList[i].newName = productList[i].name
+        .toLowerCase()
+        .replace(
+          searchValue.toLowerCase(),
+          `<span class="text-danger">${searchValue}</span>`
+        );
       // console.log(productList[i].name);
       searchList.push(productList[i]);
     }
   }
   displayProduct(searchList);
+}
+
+//=========================== Function To Validate Inputs =====================================================
+
+function validateProductInput(element) {
+  var regex = {
+    productName: /^[A-Z][a-z0-9]{3,10}$/,
+    productPrice: /^(1[0-9]|20)$/,
+    productCategory: /^(TV|Mobile|Screen|Laptop|other)$/i,
+    productdescription: /^.{10,30}$/,
+  };
+  if (regex[element.id].test(element.value) == true) {
+    element.classList.remove("is-invalid");
+    element.classList.add("is-valid");
+    element.nextElementSibling.classList.add("d-none");
+  } else {
+    element.classList.add("is-invalid");
+    element.classList.remove("is-valid");
+    element.nextElementSibling.classList.remove("d-none");
+  }
 }
