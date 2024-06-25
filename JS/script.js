@@ -27,7 +27,7 @@ function addProduct() {
       price: productPrice.value,
       category: productCategory.value,
       description: productDescription.value,
-      image: `./images/${productImage.files[0]}`,
+      image: `./images/${productImage.files[0].name}`,
     };
     if (productImage.files[0] == undefined) {
       product.image = "./images/mr_pants3.jpg";
